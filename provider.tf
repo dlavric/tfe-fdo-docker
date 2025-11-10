@@ -6,7 +6,7 @@ terraform {
     }
     acme = {
       source  = "vancluever/acme"
-      version = "2.17.2"
+      version = "2.5.3"
     }
   }
 }

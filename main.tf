@@ -46,7 +46,7 @@ resource "aws_s3_bucket" "s3bucket" {
   bucket = var.certs_bucket
 
   tags = {
-    Name        = "Daniela FDO Bucket"
+    Name        = "Daniela FDO Bucket1"
     Environment = "Dev"
   }
 }
@@ -69,7 +69,7 @@ resource "aws_s3_bucket" "s3bucket_license" {
   bucket = var.license_bucket
 
   tags = {
-    Name        = "Daniela FDO License"
+    Name        = "Daniela FDO License1"
     Environment = "Dev"
   }
 }
@@ -95,7 +95,7 @@ resource "aws_subnet" "publicsub" {
   cidr_block = "10.0.1.0/24"
 
   tags = {
-    Name = "daniela-public-subnet"
+    Name = "daniela-public-subnet1"
   }
 }
 
@@ -104,7 +104,7 @@ resource "aws_internet_gateway" "internetgw" {
   vpc_id = aws_vpc.vpc.id
 
   tags = {
-    Name = "daniela-internet-gateway"
+    Name = "daniela-internet-gateway1"
   }
 }
 
@@ -117,7 +117,7 @@ resource "aws_route_table" "route" {
   }
 
   tags = {
-    Name = "daniela-route"
+    Name = "daniela-route1"
   }
 }
 
@@ -155,7 +155,7 @@ resource "aws_security_group" "securitygp" {
   }
 
   tags = {
-    type = "daniela-security-group"
+    type = "daniela-security-group1"
   }
 }
 
@@ -177,7 +177,7 @@ resource "aws_eip" "eip" {
 
 # Create roles and policies to attach to the instance
 resource "aws_iam_role" "daniela-role" {
-  name = "daniela-role-docker"
+  name = "daniela-role-docker1"
 
   assume_role_policy = jsonencode({
     Version = "2012-10-17"
@@ -194,12 +194,12 @@ resource "aws_iam_role" "daniela-role" {
 }
 
 resource "aws_iam_instance_profile" "daniela-profile" {
-  name = "daniela-profile-docker"
+  name = "daniela-profile-docker1"
   role = aws_iam_role.daniela-role.name
 }
 
 resource "aws_iam_role_policy" "daniela-policy" {
-  name = "daniela-policy-docker"
+  name = "daniela-policy-docker1"
   role = aws_iam_role.daniela-role.id
 
   # Terraform's "jsonencode" function converts a
@@ -263,7 +263,7 @@ resource "aws_instance" "instance" {
   }
 
   tags = {
-    Name = "daniela-tfe-fdodocker"
+    Name = "daniela-tfe-fdodocker1"
   }
 
 }

@@ -70,7 +70,18 @@ write_files:
        sudo apt-get update
 
        #install Docker Engine, containerd, and Docker Compose latest version
-       sudo apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+       #sudo apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+
+       #install Docker Engine, containerd, WITHOUT Docker Compose
+       sudo apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin
+
+       #just for testing docker compose version 2.40.2
+       #install Docker Engine, containerd, and Docker Compose 2.40.2
+       sudo mkdir -p /usr/local/lib/docker/cli-plugins && \
+       sudo curl -SL https://github.com/docker/compose/releases/download/v2.40.2/docker-compose-$(uname -s)-$(uname -m) -o /usr/local/lib/docker/cli-plugins/docker-compose && \
+       sudo chmod +x /usr/local/lib/docker/cli-plugins/docker-compose && \
+       docker compose version
+
     permissions: '0750'
     path: /var/tmp/install-docker.sh
   - content: |
@@ -136,6 +147,7 @@ write_files:
       IACT_TOKEN=`docker compose exec tfe retrieve-iact | tee /opt/tfe-fdo/iact-token.txt`
 
       #create the first admin user
+      #do this manually from the tfe container to create the admin user manually in the UI tfectl admin token --url
       curl -k \
           --header "Content-Type: application/json" \
           --request POST \
